@@ -66,7 +66,7 @@ it('works with all types of react native built-in components', () => {
     const WalkthroughableComponent = walkthroughableComponents[key];
 
     const tree = renderer.create(
-      // @ts-expect-error just for testing
+      // @ts-ignore
       <WalkthroughableComponent copilot={{ keyForNum: 1, keyForStr: 'hello' }} />
     );
 

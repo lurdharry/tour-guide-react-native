@@ -221,7 +221,7 @@ export const CopilotModal = forwardRef<CopilotModalHandle, Props>(function Copil
 
         setContainerVisible(true);
         requestAnimationFrame(() => {
-          void frame();
+          frame();
         });
       });
     },
@@ -236,7 +236,7 @@ export const CopilotModal = forwardRef<CopilotModalHandle, Props>(function Copil
 
   const handleStop = () => {
     reset();
-    void stop();
+    stop();
   };
 
   const handleMaskClick = () => {

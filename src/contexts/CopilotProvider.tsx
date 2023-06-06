@@ -113,7 +113,7 @@ export const CopilotProvider = ({
       setTimeout(
         () => {
           if (move && step) {
-            void moveModalToStep(step);
+            moveModalToStep(step);
           }
         },
         scrollView != null ? 100 : 0
@@ -128,22 +128,22 @@ export const CopilotProvider = ({
         setScrollView(suppliedScrollView);
       }
 
-      const currentStepNow = fromStep ? steps[fromStep] : getFirstStep();
+      const currentStepFromStart = fromStep ? steps[fromStep] : getFirstStep();
 
       if (startTries.current > MAX_START_TRIES) {
         startTries.current = 0;
         return;
       }
 
-      if (currentStepNow == null) {
+      if (currentStepFromStart == null) {
         startTries.current += 1;
         requestAnimationFrame(() => {
-          void start(fromStep);
+          start(fromStep);
         });
       } else {
         copilotEvents.emit('start');
-        await setCurrentStep(currentStepNow);
-        await moveModalToStep(currentStepNow);
+        await setCurrentStep(currentStepFromStart);
+        await moveModalToStep(currentStepFromStart);
         await setVisibility(true);
         startTries.current = 0;
       }

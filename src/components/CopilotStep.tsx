@@ -23,7 +23,7 @@ export const CopilotStep = ({ name, order, text, children, active = true }: Prop
       width: number;
       height: number;
     }>((resolve) => {
-      const measure = () => {
+      const measureShape = () => {
         // Wait until the wrapper element appears
         if (wrapperRef.current != null && 'measure' in wrapperRef.current) {
           wrapperRef.current.measure((_ox, _oy, width, height, x, y) => {
@@ -35,11 +35,11 @@ export const CopilotStep = ({ name, order, text, children, active = true }: Prop
             });
           });
         } else {
-          requestAnimationFrame(measure);
+          requestAnimationFrame(measureShape);
         }
       };
 
-      measure();
+      measureShape();
     });
   };
 
@@ -62,10 +62,13 @@ export const CopilotStep = ({ name, order, text, children, active = true }: Prop
 
   useEffect(() => {
     if (active) {
-      if (registeredName.current) {
-        unregisterStep(registeredName.current);
-      }
+      return () => {
+        if (registeredName.current) {
+          return unregisterStep(registeredName.current);
+        }
+      };
     }
+    return () => {};
   }, [name, unregisterStep, active]);
 
   const copilotProps = useMemo(

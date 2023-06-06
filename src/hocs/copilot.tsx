@@ -5,8 +5,8 @@ import { type CopilotOptions } from '../types';
 
 const ComponentWithCopilotContext = (WrappedComponent: ComponentType) => {
   const Component: FunctionComponent<any> = (props) => {
-    const copilotDetails = useCopilot();
-    return <WrappedComponent {...props} {...copilotDetails} />;
+    const copilotProps = useCopilot();
+    return <WrappedComponent {...props} {...copilotProps} />;
   };
 
   Component.displayName = `CopilotInjector(${
